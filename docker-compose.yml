@@ -10,7 +10,7 @@ services:
       - db
     environment:
       RAILS_ENV: development
-      DATABASE_URL: postgres://postgres:mysecretpassword@db:5432/postgres
+      DATABASE_URL: postgres://devto:devto@db:5432/devto_development
       YARN_INTEGRITY_ENABLED: "false"
     volumes:
       - .:/usr/src/app
@@ -25,5 +25,9 @@ services:
     command: ./bin/webpack-dev-server
   db:
     image: postgres
+    environment:
+      POSTGRES_PASSWORD: devto
+      POSTGRES_USER: devto
+      POSTGRES_DB: devto_development
     ports:
     - "5432:5432"

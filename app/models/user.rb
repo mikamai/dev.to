@@ -12,6 +12,7 @@ class User < ApplicationRecord
 
   acts_as_followable
   acts_as_follower
+  is_keybase_provable
 
   has_many :organization_memberships, dependent: :destroy
   has_many :organizations, through: :organization_memberships

@@ -156,3 +156,5 @@ end
 group :doc do
   gem "sdoc", "~> 1.0" # rdoc generator html with javascript search index
 end
+
+gem "prove_keybase", "~> 0.1.2"

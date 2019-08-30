@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     registrations: "registrations"
   }
 
+  mount ProveKeybase::Engine => "/prove_keybase"
+
   authenticated :user, ->(user) { user.tech_admin? } do
     mount DelayedJobWeb, at: "/delayed_job"
   end

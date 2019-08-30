@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_27_163358) do
+ActiveRecord::Schema.define(version: 2019_08_30_170146) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -501,6 +501,19 @@ ActiveRecord::Schema.define(version: 2019_08_27_163358) do
     t.string "remoteness"
     t.string "time_commitment"
     t.datetime "updated_at", null: false
+  end
+
+  create_table "keybase_proofs", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "kb_username", default: "", null: false
+    t.boolean "proof_live"
+    t.boolean "proof_valid"
+    t.text "token", default: "", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.string "username", default: "", null: false
+    t.index ["user_id"], name: "index_keybase_proofs_on_user_id"
+    t.index ["username", "kb_username"], name: "index_kb_proofs_on_local_user", unique: true
   end
 
   create_table "mentions", id: :serial, force: :cascade do |t|
@@ -1164,6 +1177,7 @@ ActiveRecord::Schema.define(version: 2019_08_27_163358) do
   add_foreign_key "badge_achievements", "users"
   add_foreign_key "chat_channel_memberships", "chat_channels"
   add_foreign_key "chat_channel_memberships", "users"
+  add_foreign_key "keybase_proofs", "users", on_delete: :cascade
   add_foreign_key "messages", "chat_channels"
   add_foreign_key "messages", "users"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
